@@ -1,5 +1,3 @@
-# Final-Project
-
 # Employee Loss
 
 <!-- README -->
@@ -31,30 +29,32 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-But really - how big is a brain?
+Employees join and leave jobs for many different reasons. This project utilizes user driven data collection and machine learning to model and predict when an employee will decide to leave their job. 
 
 ###### Requirements
 
-1. Our visualization includes a Python Flask–powered API, HTML/CSS, JavaScript, and at
-least one database.
-- SQLite
+1. Find a problem worth solving, analyzing, or visualizing
+  -Can we predict when an employee will leave a job?
 
-2. Our project falls into the track:
-- A dashboard page with multiple charts that update from the same data
+2. Use ML in the context of technologies learned
 
-3. Your project should include at least one JS library that we did not cover.
-- We used Charts.js 
+3. You must use:
+  - Scikit-Learn
+  - and/or another machine learning library
+ 
+4. Our technologies include:
+  - Python Flask-powered API
+  - HTML/CSS
+  - JavaScript
+  - SQLite
+  - Pandas
+  - Jupyter Notebook
+  - Scikit-Learn
+  
+5. Host Application using Heroku or tool of your choice (Github Pages)
 
-4. Your project must be powered by a data set with at least 100 records.
-- Over 200 records available by default
-
-5. Your project must include some level of user-driven interaction (e.g., menus, dropdowns,
-textboxes).
-- User submission form to database
-
-6. Your final visualization should ideally include at least three views.
-- Final visualization has 1 view, but 4 cards with metrics
-
+8. Prepare a 15-minute data deep-dive or infrastructure walkthrough that shows
+   machine learning in the context of what we've already learned
 
 <!-- BUILT WITH -->
 ## Built With
@@ -72,7 +72,7 @@ textboxes).
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/gldn_god/big-brained-brads/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/SteveZych/Final-Project/issues) for a list of proposed features (and known issues).
 
 
 <!-- CONTRIBUTING -->
@@ -90,11 +90,8 @@ Contributions are what make the open source community such an amazing place to b
 <!-- CONTACT -->
 ## Contact
 
-* [Ce'Aren](https://github.com/Crobinson17)
-* [Enich](https://github.com/e-621/)
-* [Katie](https://github.com/KStrange89)
 * [Steven](https://github.com/SteveZych)
 * [Tommy](https://github.com/gldn-god/)
 
 
-Project Link: [Big Brained Brads](https://github.com/gldn-god/big-brained-brads)
+Project Link: [Employee Loss](https://github.com/SteveZych/Final-Project/issues)
