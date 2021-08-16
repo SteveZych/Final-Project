@@ -1,7 +1,7 @@
 # Employee Loss
 
 <!-- README -->
-  <h3 align="center">Employee Loss Web App</h3>
+  <h3 align="center">Employee Attrition Web App</h3>
   <p align="center"> 
     How would your hiring strategies change if you were able to predict when an employee would leave your company?
     <br />
