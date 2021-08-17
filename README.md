@@ -29,7 +29,11 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Employees join and leave jobs for many different reasons. This project utilizes user driven data collection and machine learning to model and predict when an employee will decide to leave their job. 
+Employees join and leave jobs for many different reasons. This project utilizes machine learning to model and predict when an employee may decide to leave their job. 
+
+*  User-Driven Data Gathering
+*  
+*  
 
 ###### Requirements
 
