@@ -28,8 +28,9 @@ def terminations():
             termDate = request.form['termDate']
             status = request.form['status']
 
-            with sql.connect("brains.sqlite") as con:
+            with sql.connect("hr.sqlite") as con:
                 cur = con.cursor()
+                cur.execute("UPDATE employee SET WHERE")
                 cur.execute("INSERT INTO brain_weights (gender,age,size,weight) VALUES (?,?,?,?)",(gender,age,size,weight))
             
             con.commit()
