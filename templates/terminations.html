@@ -376,15 +376,13 @@
                                 <!-- Form Body -->
                                 <div class="card-body">
                                     <div class="">
-                                        <form action="/" method="post">
-                                            <div class="mb-3">
-                                                <label for="employeeID">Employee ID:</label><br>
-                                                <input type="text" id="employeeID" name="employeeID"><br>
-                                              </div>
-                                              <div class="mb-3 ">
-                                                <label for="reason">Reason:</label><br>
-                                                <select id="reason" class="form-select" aria-label="Default select example" name="reason">
-                                                    <!--<option selected>Select Gender</option>-->
+                                        <form action="/terminations" method="post">
+                                            
+                                                <label for="employeeID">Employee ID:</label>
+                                                <input type="text" id="employeeID" name="employeeID" size="6">
+                                              
+                                                <label for="reason">Reason:</label>
+                                                <select id="reason" class="form-select" aria-label="Default select example" name="reason" style="width:175px">
                                                     <option value="anotherPosition ">Another Position</option>
                                                     <option value="attendanceIssues">Attendance Issues</option>
                                                     <option value="careerChange">Career Change</option>
@@ -403,15 +401,16 @@
                                                     <option value="school">Return to School</option>
                                                     <option value="unhappy">Unhappy</option>
                                                   </select>
-                                              </div>
-                                              <div class="mb-3">
-                                                <label for="weight">Weight (grams):</label><br>
-                                                <input type="" id="weight" name="weight">
-                                              </div>
-                                              <div class="mb-3">
-                                                <label for="size">Size (cm^3):</label><br>
-                                                <input type="" id="size" name="size">
-                                              </div>
+                                              
+                                                <label for="termDate">Termination Date:</label>
+                                                <input type="date" id="termDate" name="termDate" style="width:175px">
+                                              
+                                                <label for="status">Employee Status:</label>
+                                                <select id="status" class="form-select" aria-label="Default select example" name="status" style="width:175px">
+                                                    <option value="voluntairly">Voluntairly Terminated</option>
+                                                    <option value="cause">Terminated for Cause</option>
+                                                </select>
+                                              
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
                                     </div>
