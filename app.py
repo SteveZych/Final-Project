@@ -17,7 +17,7 @@ def tables():
     rows = cur.fetchall()
     return render_template("tables.html", rows = rows)
 
-@app.route('/terminations')
+@app.route('/terminations', methods = ['POST', 'GET'])
 def terminations():
     
     # Form for editing existing employees for termination
@@ -28,12 +28,14 @@ def terminations():
             termDate = request.form['termDate']
             status = request.form['status']
 
-            with sql.connect("hr.sqlite") as con:
+            with sql.connect("data/hr.sqlite") as con:
                 cur = con.cursor()
-                cur.execute("UPDATE employee SET terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?", (reason, termDate, status, employeeID))
+                cur.execute("UPDATE employee SET is_terminated=1, terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?", (reason, termDate, status, employeeID))
             con.commit()
+            print("Employee terminated.")
         except:
             con.rollback()
+            print("Something went wrong.")
         finally:
             return redirect("/terminations")
             con.close()
@@ -42,7 +44,7 @@ def terminations():
     con = sql.connect("data/hr.sqlite")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT * FROM employee WHERE is_terminated = 1 ORDER BY employee_id DESC LIMIT 10")
+    cur.execute("SELECT * FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10")
     rows = cur.fetchall()
     return render_template("terminations.html", rows = rows)
 
