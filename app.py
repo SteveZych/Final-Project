@@ -17,11 +17,33 @@ def tables():
     rows = cur.fetchall()
     return render_template("tables.html", rows = rows)
 
-# @app.route('/terminations')
-# def terminations():
-#     # Display table of terminations
-#     # Form for editing existing employees for termination
-#     return render_template('terminations.html')
+@app.route('/terminations')
+def terminations():
+    
+    # Form for editing existing employees for termination
+    if request.method == 'POST':
+        try:
+            employeeID = request.form['employeeID']
+            reason = request.form['reason']
+            termDate = request.form['termDate']
+            status = request.form['status']
+
+            with sql.connect("brains.sqlite") as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO brain_weights (gender,age,size,weight) VALUES (?,?,?,?)",(gender,age,size,weight))
+            
+            con.commit()
+        
+        except:
+            con.rollback()
+
+        finally:
+            return redirect("/")
+            con.close()
+
+
+    # Display table of terminations, query "SELECT * FROM employee WHERE is_terminated = "1" ORDER BY employee_id DESC LIMIT 10"
+    return render_template('terminations.html')
 
 # @app.route('/newHires')
 # def terminations():
