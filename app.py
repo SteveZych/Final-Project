@@ -30,21 +30,21 @@ def terminations():
 
             with sql.connect("hr.sqlite") as con:
                 cur = con.cursor()
-                cur.execute("UPDATE employee SET WHERE")
-                cur.execute("INSERT INTO brain_weights (gender,age,size,weight) VALUES (?,?,?,?)",(gender,age,size,weight))
-            
+                cur.execute("UPDATE employee SET terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?", (reason, termDate, status, employeeID))
             con.commit()
-        
         except:
             con.rollback()
-
         finally:
-            return redirect("/")
+            return redirect("/terminations")
             con.close()
 
-
     # Display table of terminations, query "SELECT * FROM employee WHERE is_terminated = "1" ORDER BY employee_id DESC LIMIT 10"
-    return render_template('terminations.html')
+    con = sql.connect("data/hr.sqlite")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT * FROM employee WHERE is_terminated = 1 ORDER BY employee_id DESC LIMIT 10")
+    rows = cur.fetchall()
+    return render_template("terminations.html", rows = rows)
 
 # @app.route('/newHires')
 # def terminations():
