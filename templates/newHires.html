@@ -371,7 +371,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">TERMINATE THEM!</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">New Employee Demographics</h6>
                                 </div>
                                 <!-- Form Body -->
                                 <div class="card-body">
@@ -379,19 +379,89 @@
                                         <form action="/terminations" method="post">
                                             
                                                 <label for="employeeID">Employee Name:</label>
-                                                <input type="text" id="employeeName" name="employeeName">
+                                                <input type="text" id="employeeName" name="employeeName" placeholder="Last, First">
 
-                                                <label for="employeeSalary">Employee Salary:</label>
-                                                <input type="number" id="employeeSalary" name="employeeSalary">
+                                                <label for="employeeSalary">Salary:</label>
+                                                <input type="number" id="employeeSalary" name="employeeSalary" size="6">
 
-                                                <label for="employeeSalary">Employee Salary:</label>
-                                                <select id="employeeSalary" class="form-select" aria-label="Default select example" name="employeeSalary" style="width:175px">
+                                                <label for="position">Position:</label>
+                                                <select id="position" class="form-select" aria-label="Default select example" name="position" style="width:175px">
                                                     {% for job in positions %}
                                                     <option value="{{job}}">{{job}}</option>
                                                     {% end for %}
                                                 </select>
+                                                <br>
+                                                <label for="state">State:</label>
+                                                <input type="text" id="state" name="state" size="2">
 
-                                                
+                                                <label for="zipCode">Zip Code:</label>
+                                                <input type="number" id="zipCode" name="zipCode">
+
+                                                <label for="dob">Date of Birth:</label>
+                                                <input type="date" id="dob" name="dob">
+                                                <br>
+                                                <label for="gender">Gender:</label>
+                                                <input type="text" id="gender" name="gender" size="1">
+
+                                                <label for="maritalStatus">Marital Status:</label>
+                                                <select id="maritialStatus" class="form-select" aria-label="Default select example" name="maritialStatus" style="width:175px">
+                                                    <option value="Divorced">Divorced</option>
+                                                    <option value="Married">Married</option>
+                                                    <option value="Separated">Separated</option>
+                                                    <option value="Single">Single</option>
+                                                    <option value="Widowed">Widowed</option>
+                                                </select>
+
+                                                <label for="citizenshipStatus">Citizenship Status:</label>
+                                                <select id="citizenshipStatus" class="form-select" aria-label="Default select example" name="citizenshipStatus" style="width:175px">
+                                                    <option value="US Citizen">US Citizen</option>
+                                                    <option value="Non-Citizen">Non-Citizen</option>
+                                                    <option value="Eligible NonCitizen">Eligible NonCitizen</option>
+                                                </select>
+                                                <br>
+                                                <label for="hispanic">Hispanic:</label>
+                                                <select id="hispanic" class="form-select" aria-label="Default select example" name="hispanic" style="width:175px">
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+
+                                                <label for="ethnicity">Ethnicity:</label>
+                                                <select id="ethnicity" class="form-select" aria-label="Default select example" name="ethnicity" style="width:175px">
+                                                    <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                                                    <option value="Asian">Asian</option>
+                                                    <option value="Black or African American">Black or African American</option>
+                                                    <option value="Hispanic">Hispanic</option>
+                                                    <option value="Two or more races">Two or more races</option>
+                                                    <option value="White">White</option>
+                                                </select>
+
+                                                <label for="hireDate">Hire Date:</label>
+                                                <input type="date" id="hireDate" name="hireDate">
+                                                <br>
+                                                <!--Automatically make employee_status = active-->
+
+                                                <label for="department">Department:</label>
+                                                <select id="department" class="form-select" aria-label="Default select example" name="department" style="width:175px">
+                                                    <option value="Admin Offices">Admin Offices</option>
+                                                    <option value="Executive Offices">Executive Offices</option>
+                                                    <option value="IT/IS">IT/IS</option>
+                                                    <option value="Production">Production</option>
+                                                    <option value="Sales">Sales</option>
+                                                    <option value="Software Engineering">Software Engineering</option>
+                                                </select>
+
+                                                <label for="recruited">Recruited From:</label>
+                                                <select id="recruited" class="form-select" aria-label="Default select example" name="recruited" style="width:175px">
+                                                    <option value="CareerBuilder">CareerBuilder</option>
+                                                    <option value="Diversity Job Fair">Diversity Job Fair</option>
+                                                    <option value="Employee Referral">Employee Referral</option>
+                                                    <option value="Google Search">Google Search</option>
+                                                    <option value="Indeed">Indeed</option>
+                                                    <option value="LinkedIn">LinkedIn</option>
+                                                    <option value="On-line Web application">On-ine Web application</option>
+                                                    <option value="Other">Other</option>
+                                                    <option value="Website">Website</option>
+                                                </select>
                                               
                                               <button type="submit" class="btn btn-primary">Submit</button>
                                         </form>
@@ -415,8 +485,9 @@
                                             <th>Position</th>
                                             <th>Department</th>
                                             <th>Status</th>
-                                            <th>Termination Date</th>
-                                            <th>Reason for Termination</th>
+                                            <th>Hire Date</th>
+                                            <th>Salary</th>
+                                            <th>Recrutied From</th>
                                         </tr> <!-- header above -->
                                     </thead>
                                     <tbody>
@@ -426,8 +497,9 @@
                                             <td>{{row["position"]}}</td>
                                             <td>{{row["department"]}}</td>
                                             <td>{{row["employee_status"]}}</td>
-                                            <td>{{row["terminated_date"]}}</td>
-                                            <td>{{row["terminated_reason"]}}</td>
+                                            <td>{{row["hired_date"]}}</td>
+                                            <td>{{row["employee_salary"]}}</td>
+                                            <td>{{row["source_recruiting"]}}</td>
                                         </tr>
                                         {% endfor %} 
                                     </tbody>
