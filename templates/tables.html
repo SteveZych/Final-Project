@@ -380,6 +380,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>ID</th>
                                             <th>Status</th>
                                             <th>Position</th>
                                             <th>Department</th>
@@ -391,6 +392,7 @@
                                         {% for row in rows %}  
                                         <tr>  
                                             <td>{{row["employee_name"]}}</td>
+                                            <td>{{row["employee_id"]}}</td>
                                             <td>{{row["employee_status"]}}</td>
                                             <td>{{row["position"]}}</td>
                                             <td>{{row["department"]}}</td>
