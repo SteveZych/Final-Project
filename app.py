@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3 as sql
 import pandas as pd
+from classesAndFunctions import *
 
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ def tables():
 
 @app.route('/terminations', methods = ['POST', 'GET'])
 def terminations():
-    
+
     # Form for editing existing employees for termination
     if request.method == 'POST':
         try:
@@ -68,7 +69,7 @@ def youreHired():
             zipCode = request.form['zipCode']
             dob = request.form['dob']
             gender = request.form['gender']
-            maritialStatus = request.form['maritialStatus']
+            maritalStatus = request.form['maritialStatus']
             citizenshipStatus = request.form['citizenshipStatus']
             hispanic = request.form['hispanic']
             ethnicity = request.form['ethnicity']
@@ -76,17 +77,19 @@ def youreHired():
             department = request.form['department']
             recruited = request.form['recruited']
 
+            whatever = NewHire(employeeName, employeeSalary, position, state, zipCode, dob, gender, maritalStatus, citizenshipStatus, hispanic, ethnicity, hireDate, department, recruited)
+
 
             with sql.connect("data/hr.sqlite") as con:
                 cur = con.cursor()
-                cur.execute("UPDATE employee SET is_terminated=1, terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?;", (reason, termDate, status, employeeID))
+                cur.execute("UPDATE employee SET is_terminated=1, terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?;", (whatever.employeeName, ))
             con.commit()
-            print("Employee terminated.")
+            print("Employee created.")
         except:
             con.rollback()
             print("Something went wrong.")
         finally:
-            return redirect("/terminations")
+            return redirect("/newHires")
             con.close()
 
     # Display table of most recent hires
