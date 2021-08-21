@@ -146,7 +146,7 @@
                                 <!-- Form Body -->
                                 <div class="card-body">
                                     <div class="">
-                                        <form action="/terminations" method="post">
+                                        <form action="/newHires" method="post">
                                             
                                                 <label for="employeeID">Employee Name:</label>
                                                 <input type="text" id="employeeName" name="employeeName" placeholder="Last, First">
@@ -171,14 +171,13 @@
                                                 <input type="date" id="dob" name="dob">
                                                 <br>
                                                 <label for="gender">Gender:</label>
-                                                <input type="text" id="gender" name="gender" size="1">
                                                 <select id="gender" class="form-select" aria-label="Default select example" name="gender" style="width:40px">
                                                     <option value="M">Male</option>
                                                     <option value="F">Female</option>
                                                 </select>
 
                                                 <label for="maritalStatus">Marital Status:</label>
-                                                <select id="maritialStatus" class="form-select" aria-label="Default select example" name="maritialStatus" style="width:175px">
+                                                <select id="maritalStatus" class="form-select" aria-label="Default select example" name="maritalStatus" style="width:175px">
                                                     <option value="Divorced">Divorced</option>
                                                     <option value="Married">Married</option>
                                                     <option value="Separated">Separated</option>
@@ -212,7 +211,6 @@
                                                 <label for="hireDate">Hire Date:</label>
                                                 <input type="date" id="hireDate" name="hireDate">
                                                 <br>
-                                                <!--Automatically make employee_status = active-->
 
                                                 <label for="department">Department:</label>
                                                 <select id="department" class="form-select" aria-label="Default select example" name="department" style="width:175px">
@@ -232,7 +230,7 @@
                                                     <option value="Google Search">Google Search</option>
                                                     <option value="Indeed">Indeed</option>
                                                     <option value="LinkedIn">LinkedIn</option>
-                                                    <option value="On-line Web application">On-ine Web application</option>
+                                                    <option value="On-line Web application">On-line Web application</option>
                                                     <option value="Other">Other</option>
                                                     <option value="Website">Website</option>
                                                 </select>
@@ -328,21 +326,21 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="/static/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="/static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="/static/js/demo/datatables-demo.js"></script>
 
 </body>
 

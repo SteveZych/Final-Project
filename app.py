@@ -49,13 +49,21 @@ def terminations():
     return render_template("terminations.html", rows = rows)
 
 @app.route('/newHires', methods = ['POST', 'GET'])
-def youreHired():
+def hires():
+    
     # populate positions input
     con = sql.connect("data/hr.sqlite")
     con.row_factory = sql.Row
     cur = con.cursor()
     cur.execute("SELECT DISTINCT position FROM employee ORDER BY 1 ASC")
     positions = cur.fetchall()
+
+    # Display table of most recent hires
+    con = sql.connect("data/hr.sqlite")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
+    rows = cur.fetchall()
 
     # Form for adding new employees
     if request.method == 'POST':
@@ -79,10 +87,11 @@ def youreHired():
 
             with sql.connect("data/hr.sqlite") as con:
                 cur = con.cursor()
-                cur.execute("""
-                    INSERT INTO employee   
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    ;""", (newEmployee.employeeName, newEmployee.employee_id))
+                cur.execute("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (\
+                        newEmployee.employeeName, 765432, newEmployee.is_married, newEmployee.maritial_status_id, newEmployee.employee_status_id, newEmployee.department_id, newEmployee.perf_score_id, newEmployee.is_diversity_job_fair, \
+                        newEmployee.employeeSalary, newEmployee.is_active, newEmployee.is_terminated, newEmployee.position_id, newEmployee.position, newEmployee.state, newEmployee.zipCode, newEmployee.dob, newEmployee.gender_id, newEmployee.gender, \
+                        newEmployee.is_underrep_gender, newEmployee.maritalStatus, newEmployee.is_citizen, newEmployee.citizenshipStatus, newEmployee.is_hispanic_latino, newEmployee.ethnicity, newEmployee.is_underrep_race_eth, newEmployee.hireDate, \
+                        newEmployee.terminated_date, newEmployee.terminated_reason, newEmployee.employee_status, newEmployee.department, newEmployee.recruited, None, None, None, 0, None, 0, 0))
             con.commit()
             print("Employee created.")
         except:
@@ -91,14 +100,6 @@ def youreHired():
         finally:
             return redirect("/newHires")
             con.close()
-
-    # Display table of most recent hires
-    con = sql.connect("data/hr.sqlite")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
-    rows = cur.fetchall()
-    
     return render_template('newHires.html', positions = positions, rows = rows)
 
 @app.route('/mlModel')
@@ -107,38 +108,3 @@ def learning():
     # graph of data 
     # algorithm from scikitlearn
     return render_template('mlModel.html')
-
-
-
-
-                        # employee_name, 
-                        # employee_id, 
-                        # is_married, 
-                        # marital_status_id, 
-                        # employee_status_id, 
-                        # department_id, 
-                        # perf_score_id, 
-                        # is_diversity_job_fair, 
-                        # employee_salary,
-                        # is_active,
-                        # is_terminated,
-                        # position_id,
-                        # position,
-                        # location_state,
-                        # location_zip,
-                        # employee_dob,
-                        # gender_id,
-                        # gender_code,
-                        # is_underrep_gender,
-                        # marital_status_name,
-                        # is_citizen,
-                        # citizenship_status,
-                        # is_hispanic_latino,
-                        # employee_race_ethnicity,
-                        # is_underrep_race_eth,
-                        # hired_date,
-                        # terminated_date,
-                        # terminated_reason,
-                        # empoyee_status,
-                        # department,
-                        # source_recruiting

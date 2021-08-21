@@ -184,12 +184,12 @@ class NewHire():
             cell = 0
         return cell
 
-    @staticmethod
-    def employee_id():
-        con = sql.connect("data/hr.sqlite")
-        cur = con.cursor()
-        employeePK = cur.execute("SELECT MAX(employee_id) FROM employee")
-        return employeePK + 1
+    # @staticmethod
+    # def employee_id():
+    #     con = sql.connect("data/hr.sqlite")
+    #     cur = con.cursor()
+    #     employeePK = cur.execute("SELECT MAX(employee_id) FROM employee")
+    #     return employeePK + 1
         
 
 
