@@ -20,7 +20,6 @@ def tables():
 
 @app.route('/terminations', methods = ['POST', 'GET'])
 def terminations():
-
     # Form for editing existing employees for termination
     if request.method == 'POST':
         try:
@@ -51,7 +50,6 @@ def terminations():
 
 @app.route('/newHires', methods = ['POST', 'GET'])
 def youreHired():
-
     # populate positions input
     con = sql.connect("data/hr.sqlite")
     con.row_factory = sql.Row
@@ -77,12 +75,14 @@ def youreHired():
             department = request.form['department']
             recruited = request.form['recruited']
 
-            whatever = NewHire(employeeName, employeeSalary, position, state, zipCode, dob, gender, maritalStatus, citizenshipStatus, hispanic, ethnicity, hireDate, department, recruited)
-
+            newEmployee = NewHire(employeeName, employeeSalary, position, state, zipCode, dob, gender, maritalStatus, citizenshipStatus, hispanic, ethnicity, hireDate, department, recruited)
 
             with sql.connect("data/hr.sqlite") as con:
                 cur = con.cursor()
-                cur.execute("UPDATE employee SET is_terminated=1, terminated_reason=?, terminated_date=?, employee_status=? WHERE employee_id=?;", (whatever.employeeName, ))
+                cur.execute("""
+                    INSERT INTO employee   
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ;""", (newEmployee.employeeName, newEmployee.employee_id))
             con.commit()
             print("Employee created.")
         except:
@@ -96,14 +96,49 @@ def youreHired():
     con = sql.connect("data/hr.sqlite")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
+    cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
     rows = cur.fetchall()
     
-    return render_template('newHires.html', positions = positions, rows=rows)
+    return render_template('newHires.html', positions = positions, rows = rows)
 
-# @app.route('/mlModel')
-# def learning():
-#     # description of model and display code?
-#     # graph of data 
-#     # algorithm from scikitlearn
-#     return render_template('mlModel.html')
+@app.route('/mlModel')
+def learning():
+    # description of model and display code?
+    # graph of data 
+    # algorithm from scikitlearn
+    return render_template('mlModel.html')
+
+
+
+
+                        # employee_name, 
+                        # employee_id, 
+                        # is_married, 
+                        # marital_status_id, 
+                        # employee_status_id, 
+                        # department_id, 
+                        # perf_score_id, 
+                        # is_diversity_job_fair, 
+                        # employee_salary,
+                        # is_active,
+                        # is_terminated,
+                        # position_id,
+                        # position,
+                        # location_state,
+                        # location_zip,
+                        # employee_dob,
+                        # gender_id,
+                        # gender_code,
+                        # is_underrep_gender,
+                        # marital_status_name,
+                        # is_citizen,
+                        # citizenship_status,
+                        # is_hispanic_latino,
+                        # employee_race_ethnicity,
+                        # is_underrep_race_eth,
+                        # hired_date,
+                        # terminated_date,
+                        # terminated_reason,
+                        # empoyee_status,
+                        # department,
+                        # source_recruiting

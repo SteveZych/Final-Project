@@ -42,7 +42,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/">
                     <span>Home</span></a>
             </li>
@@ -55,14 +55,19 @@
                 Resources
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu-->
-            <li class="nav-item">
+            <!-- Nav Item-->
+            <li class="nav-item active">
                 <a class="nav-link" href="/newHires">
                     <i class="fas fa-fw fa-table"></i>
                     <span>New Hires</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="/terminations">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Terminations</span></a>
+            </li>  
+            <li class="nav-item">
                 <a class="nav-link" href="/tables">
                     <i class="fas fa-fw fa-table"></i>
                     <span>All History</span></a>
@@ -78,7 +83,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="/mlModel">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Predictive Attrition Model</span></a>
             </li>
@@ -136,7 +141,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">New Employee Demographics</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Create a New Employee</h6>
                                 </div>
                                 <!-- Form Body -->
                                 <div class="card-body">
@@ -151,9 +156,9 @@
 
                                                 <label for="position">Position:</label>
                                                 <select id="position" class="form-select" aria-label="Default select example" name="position" style="width:175px">
-                                                    {% for job in positions %}
-                                                    <option value="{{job}}">{{job}}</option>
-                                                    {% end for %}
+                                                    {% for position in positions %}
+                                                    <option value="{{position.position}}">{{position.position}}</option>
+                                                    {% endfor %}
                                                 </select>
                                                 <br>
                                                 <label for="state">State:</label>
@@ -243,7 +248,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Terminated Employees</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Most Recent Hires</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -251,23 +256,21 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>ID</th>
                                             <th>Position</th>
                                             <th>Department</th>
-                                            <th>Status</th>
                                             <th>Hire Date</th>
-                                            <th>Salary</th>
-                                            <th>Recrutied From</th>
+                                            <th>Sourced From</th>
                                         </tr> <!-- header above -->
                                     </thead>
                                     <tbody>
                                         {% for row in rows %}  
                                         <tr>  
                                             <td>{{row["employee_name"]}}</td>
+                                            <td>{{row["employee_id"]}}</td>
                                             <td>{{row["position"]}}</td>
                                             <td>{{row["department"]}}</td>
-                                            <td>{{row["employee_status"]}}</td>
                                             <td>{{row["hired_date"]}}</td>
-                                            <td>{{row["employee_salary"]}}</td>
                                             <td>{{row["source_recruiting"]}}</td>
                                         </tr>
                                         {% endfor %} 
