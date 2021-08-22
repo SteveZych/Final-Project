@@ -24,7 +24,7 @@ class NewHire():
             cell = 0
         return cell
 
-    def maritial_status_id(self):
+    def marital_status_id(self):
         if self.maritalStatus == "Married":
             cell = 1
         elif self.maritalStatus == "Divorced":
@@ -44,13 +44,14 @@ class NewHire():
             cell = 1
         return cell
 
-    def employee_status():
-        return "Active"
+    def employee_status(self):
+        cell = "Active"
+        return cell
 
-    def is_active():
+    def is_active(self):
         return 1
 
-    def is_terminated():
+    def is_terminated(self):
         return 0
 
     def employee_status_id(self):
@@ -189,7 +190,8 @@ class NewHire():
     #     con = sql.connect("data/hr.sqlite")
     #     cur = con.cursor()
     #     employeePK = cur.execute("SELECT MAX(employee_id) FROM employee")
-    #     return employeePK + 1
+    #     cell = employeePK + 1
+    #     return cell
         
 
 

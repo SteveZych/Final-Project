@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 import sqlite3 as sql
 import pandas as pd
 from classesAndFunctions import *
+import random 
 
 app = Flask(__name__)
 
@@ -50,6 +51,45 @@ def terminations():
 
 @app.route('/newHires', methods = ['POST', 'GET'])
 def hires():
+
+    # Form for adding new employees
+    if request.method == 'POST':
+        try:
+            employeeName = request.form['employeeName']
+            employeeSalary = request.form['employeeSalary']
+            position = request.form['position']
+            state = request.form['state']
+            zipCode = request.form['zipCode']
+            dob = request.form['dob']
+            gender = request.form['gender']
+            maritalStatus = request.form['maritalStatus']
+            citizenshipStatus = request.form['citizenshipStatus']
+            hispanic = request.form['hispanic']
+            ethnicity = request.form['ethnicity']
+            hireDate = request.form['hireDate']
+            department = request.form['department']
+            recruited = request.form['recruited']
+
+            newEmployee = NewHire(employeeName, employeeSalary, position, state, zipCode, dob, gender, maritalStatus, citizenshipStatus, hispanic, ethnicity, hireDate, department, recruited)
+
+            employee_id = random.randint(10312,99999)
+
+            with sql.connect("data/hr.sqlite") as con:
+                cur = con.cursor()
+                # cur.execute("INSERT INTO employee (employee_name, employee_id) VALUES (?, ?);",(newEmployee.employeeName, newEmployee.employee_id))
+                cur.execute("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (\
+                        employee_id, newEmployee.employeeName, newEmployee.is_married(), newEmployee.marital_status_id(), newEmployee.employee_status_id(), newEmployee.department_id(), newEmployee.perf_score_id(), newEmployee.is_diversity_job_fair(), \
+                        newEmployee.employeeSalary, newEmployee.is_active(), newEmployee.is_terminated(), newEmployee.position_id(), newEmployee.position, newEmployee.state, newEmployee.zipCode, newEmployee.dob, newEmployee.gender_id(), newEmployee.gender, \
+                        newEmployee.is_underrep_gender(), newEmployee.maritalStatus, newEmployee.is_citizen(), newEmployee.citizenshipStatus, newEmployee.is_hispanic_latino(), newEmployee.ethnicity, newEmployee.is_underrep_race_eth(), newEmployee.hireDate, \
+                        newEmployee.terminated_date(), newEmployee.terminated_reason(), newEmployee.employee_status(), newEmployee.department, newEmployee.recruited, None, None, None, 0, None, 0, 0))
+            con.commit()
+            print("Employee created.")
+        except:
+            con.rollback()
+            print("Bugs bugs bugs")
+        finally:
+            return redirect("/newHires")
+            con.close()
     
     # populate positions input
     con = sql.connect("data/hr.sqlite")
@@ -65,41 +105,7 @@ def hires():
     cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
     rows = cur.fetchall()
 
-    # Form for adding new employees
-    if request.method == 'POST':
-        try:
-            employeeName = request.form['employeeName']
-            employeeSalary = request.form['employeeSalary']
-            position = request.form['position']
-            state = request.form['state']
-            zipCode = request.form['zipCode']
-            dob = request.form['dob']
-            gender = request.form['gender']
-            maritalStatus = request.form['maritialStatus']
-            citizenshipStatus = request.form['citizenshipStatus']
-            hispanic = request.form['hispanic']
-            ethnicity = request.form['ethnicity']
-            hireDate = request.form['hireDate']
-            department = request.form['department']
-            recruited = request.form['recruited']
 
-            newEmployee = NewHire(employeeName, employeeSalary, position, state, zipCode, dob, gender, maritalStatus, citizenshipStatus, hispanic, ethnicity, hireDate, department, recruited)
-
-            with sql.connect("data/hr.sqlite") as con:
-                cur = con.cursor()
-                cur.execute("INSERT INTO employee VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", (\
-                        newEmployee.employeeName, 765432, newEmployee.is_married, newEmployee.maritial_status_id, newEmployee.employee_status_id, newEmployee.department_id, newEmployee.perf_score_id, newEmployee.is_diversity_job_fair, \
-                        newEmployee.employeeSalary, newEmployee.is_active, newEmployee.is_terminated, newEmployee.position_id, newEmployee.position, newEmployee.state, newEmployee.zipCode, newEmployee.dob, newEmployee.gender_id, newEmployee.gender, \
-                        newEmployee.is_underrep_gender, newEmployee.maritalStatus, newEmployee.is_citizen, newEmployee.citizenshipStatus, newEmployee.is_hispanic_latino, newEmployee.ethnicity, newEmployee.is_underrep_race_eth, newEmployee.hireDate, \
-                        newEmployee.terminated_date, newEmployee.terminated_reason, newEmployee.employee_status, newEmployee.department, newEmployee.recruited, None, None, None, 0, None, 0, 0))
-            con.commit()
-            print("Employee created.")
-        except:
-            con.rollback()
-            print("Something went wrong.")
-        finally:
-            return redirect("/newHires")
-            con.close()
     return render_template('newHires.html', positions = positions, rows = rows)
 
 @app.route('/mlModel')
