@@ -91,20 +91,18 @@ def hires():
             return redirect("/newHires")
             con.close()
     
-    # populate positions input
+    # Create connection to database
     con = sql.connect("data/hr.sqlite")
     con.row_factory = sql.Row
     cur = con.cursor()
+
+    # Populate positions input
     cur.execute("SELECT DISTINCT position FROM employee ORDER BY 1 ASC")
     positions = cur.fetchall()
 
     # Display table of most recent hires
-    con = sql.connect("data/hr.sqlite")
-    con.row_factory = sql.Row
-    cur = con.cursor()
     cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
     rows = cur.fetchall()
-
 
     return render_template('newHires.html', positions = positions, rows = rows)
 
