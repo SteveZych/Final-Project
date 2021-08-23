@@ -196,10 +196,10 @@ class NewHire():
 
 
 
-# def tableData(query):
-#     con = sql.connect("data/hr.sqlite")
-#     con.row_factory = sql.Row
-#     cur = con.cursor()
-#     cur.execute(query)
-#     rows = cur.fetchall()
-#     return rows
+def tableData(query):
+    con = sql.connect("data/hr.sqlite")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute(query)
+    rows = cur.fetchall()
+    return rows
