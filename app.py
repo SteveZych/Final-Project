@@ -42,13 +42,8 @@ def terminations():
             con.close()
 
     # Display table of terminations
-    # con = sql.connect("data/hr.sqlite")
-    # con.row_factory = sql.Row
-    # cur = con.cursor()
-    # cur.execute("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
-    # rows = cur.fetchall()
-
     rows = tableData("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
+    
     return render_template("terminations.html", rows = rows)
 
 @app.route('/newHires', methods = ['POST', 'GET'])
