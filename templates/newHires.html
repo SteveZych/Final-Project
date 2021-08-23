@@ -28,12 +28,14 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
+                        <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828l.645-1.937zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.734 1.734 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.734 1.734 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.734 1.734 0 0 0 3.407 2.31l.387-1.162zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L10.863.1z"/>
+                      </svg>
                 </div>
                 <div class="sidebar-brand-text mx-3">All-star HR<sup>2</sup></div>
             </a>
@@ -42,7 +44,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item text-gray-100">
                 <a class="nav-link" href="/">
                     <span>Home</span></a>
             </li>
@@ -51,7 +53,7 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div class="sidebar-heading text-gray-100"">
                 Resources
             </div>
 
@@ -77,7 +79,7 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div class="sidebar-heading text-gray-100"">
                 Analytics
             </div>
 
@@ -120,7 +122,7 @@
                             <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-dark" type="button">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
@@ -141,101 +143,126 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Create a New Employee</h6>
+                                    <h6 class="m-0 font-weight-bold text-dark">Create a New Employee</h6>
                                 </div>
                                 <!-- Form Body -->
                                 <div class="card-body">
-                                    <div class="">
+                                    <div class="container-fluid">
                                         <form action="/newHires" method="post">
-                                            
-                                                <label for="employeeID">Employee Name:</label>
-                                                <input type="text" id="employeeName" name="employeeName" placeholder="Last, First">
-
-                                                <label for="employeeSalary">Salary:</label>
-                                                <input type="number" id="employeeSalary" name="employeeSalary" size="6">
-
-                                                <label for="position">Position:</label>
-                                                <select id="position" class="form-select" aria-label="Default select example" name="position" style="width:175px">
-                                                    {% for position in positions %}
-                                                    <option value="{{position.position}}">{{position.position}}</option>
-                                                    {% endfor %}
-                                                </select>
-                                                <br>
-                                                <label for="state">State:</label>
-                                                <input type="text" id="state" name="state" size="2">
-
-                                                <label for="zipCode">Zip Code:</label>
-                                                <input type="number" id="zipCode" name="zipCode">
-
-                                                <label for="dob">Date of Birth:</label>
-                                                <input type="date" id="dob" name="dob">
-                                                <br>
-                                                <label for="gender">Gender:</label>
-                                                <select id="gender" class="form-select" aria-label="Default select example" name="gender" style="width:40px">
-                                                    <option value="M">Male</option>
-                                                    <option value="F">Female</option>
-                                                </select>
-
-                                                <label for="maritalStatus">Marital Status:</label>
-                                                <select id="maritalStatus" class="form-select" aria-label="Default select example" name="maritalStatus" style="width:175px">
-                                                    <option value="Divorced">Divorced</option>
-                                                    <option value="Married">Married</option>
-                                                    <option value="Separated">Separated</option>
-                                                    <option value="Single">Single</option>
-                                                    <option value="Widowed">Widowed</option>
-                                                </select>
-
-                                                <label for="citizenshipStatus">Citizenship Status:</label>
-                                                <select id="citizenshipStatus" class="form-select" aria-label="Default select example" name="citizenshipStatus" style="width:175px">
-                                                    <option value="US Citizen">US Citizen</option>
-                                                    <option value="Non-Citizen">Non-Citizen</option>
-                                                    <option value="Eligible NonCitizen">Eligible NonCitizen</option>
-                                                </select>
-                                                <br>
-                                                <label for="hispanic">Hispanic:</label>
-                                                <select id="hispanic" class="form-select" aria-label="Default select example" name="hispanic" style="width:175px">
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-
-                                                <label for="ethnicity">Ethnicity:</label>
-                                                <select id="ethnicity" class="form-select" aria-label="Default select example" name="ethnicity" style="width:175px">
-                                                    <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
-                                                    <option value="Asian">Asian</option>
-                                                    <option value="Black or African American">Black or African American</option>
-                                                    <option value="Hispanic">Hispanic</option>
-                                                    <option value="Two or more races">Two or more races</option>
-                                                    <option value="White">White</option>
-                                                </select>
-
-                                                <label for="hireDate">Hire Date:</label>
-                                                <input type="date" id="hireDate" name="hireDate">
-                                                <br>
-
-                                                <label for="department">Department:</label>
-                                                <select id="department" class="form-select" aria-label="Default select example" name="department" style="width:175px">
-                                                    <option value="Admin Offices">Admin Offices</option>
-                                                    <option value="Executive Offices">Executive Office</option>
-                                                    <option value="IT/IS">IT/IS</option>
-                                                    <option value="Production">Production</option>
-                                                    <option value="Sales">Sales</option>
-                                                    <option value="Software Engineering">Software Engineering</option>
-                                                </select>
-
-                                                <label for="recruited">Recruited From:</label>
-                                                <select id="recruited" class="form-select" aria-label="Default select example" name="recruited" style="width:175px">
-                                                    <option value="CareerBuilder">CareerBuilder</option>
-                                                    <option value="Diversity Job Fair">Diversity Job Fair</option>
-                                                    <option value="Employee Referral">Employee Referral</option>
-                                                    <option value="Google Search">Google Search</option>
-                                                    <option value="Indeed">Indeed</option>
-                                                    <option value="LinkedIn">LinkedIn</option>
-                                                    <option value="On-line Web application">On-line Web application</option>
-                                                    <option value="Other">Other</option>
-                                                    <option value="Website">Website</option>
-                                                </select>
-                                              
-                                              <button type="submit" class="btn btn-primary">Submit</button>
+                                            <div class='row'>
+                                                <div class='col-lg-4'>
+                                                    <label for="employeeID">Employee Name:</label>
+                                                    <input type="text" id="employeeName" name="employeeName" placeholder="Last, First">
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="employeeSalary">Salary:</label>
+                                                    <input type="number" id="employeeSalary" name="employeeSalary" size="6">
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="position">Position:</label>
+                                                    <select id="position" class="form-select" aria-label="Default select example" name="position" style="width:175px">
+                                                        {% for position in positions %}
+                                                        <option value="{{position.position}}">{{position.position}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-lg-4'>
+                                                    <label for="state">State:</label>
+                                                    <input type="text" id="state" name="state" size="2">
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="zipCode">Zip Code:</label>
+                                                    <input type="number" id="zipCode" name="zipCode">
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="dob">Date of Birth:</label>
+                                                    <input type="date" id="dob" name="dob">
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-lg-4'>
+                                                    <label for="gender">Gender:</label>
+                                                    <select id="gender" class="form-select" aria-label="Default select example" name="gender" style="width:40px">
+                                                        <option value="M">Male</option>
+                                                        <option value="F">Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="maritalStatus">Marital Status:</label>
+                                                    <select id="maritalStatus" class="form-select" aria-label="Default select example" name="maritalStatus" style="width:175px">
+                                                        <option value="Divorced">Divorced</option>
+                                                        <option value="Married">Married</option>
+                                                        <option value="Separated">Separated</option>
+                                                        <option value="Single">Single</option>
+                                                        <option value="Widowed">Widowed</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="citizenshipStatus">Citizenship Status:</label>
+                                                    <select id="citizenshipStatus" class="form-select" aria-label="Default select example" name="citizenshipStatus" style="width:175px">
+                                                        <option value="US Citizen">US Citizen</option>
+                                                        <option value="Non-Citizen">Non-Citizen</option>
+                                                        <option value="Eligible NonCitizen">Eligible NonCitizen</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-lg-4'>
+                                                    <label for="hispanic">Hispanic:</label>
+                                                    <select id="hispanic" class="form-select" aria-label="Default select example" name="hispanic" style="width:175px">
+                                                        <option value="Yes">Yes</option>
+                                                        <option value="No">No</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="ethnicity">Ethnicity:</label>
+                                                    <select id="ethnicity" class="form-select" aria-label="Default select example" name="ethnicity" style="width:175px">
+                                                        <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+                                                        <option value="Asian">Asian</option>
+                                                        <option value="Black or African American">Black or African American</option>
+                                                        <option value="Hispanic">Hispanic</option>
+                                                        <option value="Two or more races">Two or more races</option>
+                                                        <option value="White">White</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="hireDate">Hire Date:</label>
+                                                    <input type="date" id="hireDate" name="hireDate">
+                                                </div>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-lg-4'>
+                                                    <label for="department">Department:</label>
+                                                    <select id="department" class="form-select" aria-label="Default select example" name="department" style="width:175px">
+                                                        <option value="Admin Offices">Admin Offices</option>
+                                                        <option value="Executive Offices">Executive Office</option>
+                                                        <option value="IT/IS">IT/IS</option>
+                                                        <option value="Production">Production</option>
+                                                        <option value="Sales">Sales</option>
+                                                        <option value="Software Engineering">Software Engineering</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <label for="recruited">Recruited From:</label>
+                                                    <select id="recruited" class="form-select" aria-label="Default select example" name="recruited" style="width:175px">
+                                                        <option value="CareerBuilder">CareerBuilder</option>
+                                                        <option value="Diversity Job Fair">Diversity Job Fair</option>
+                                                        <option value="Employee Referral">Employee Referral</option>
+                                                        <option value="Google Search">Google Search</option>
+                                                        <option value="Indeed">Indeed</option>
+                                                        <option value="LinkedIn">LinkedIn</option>
+                                                        <option value="On-line Web application">On-line Web application</option>
+                                                        <option value="Other">Other</option>
+                                                        <option value="Website">Website</option>
+                                                    </select>
+                                                </div>
+                                                <div class='col-lg-4'>
+                                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -246,7 +273,7 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Most Recent Hires</h6>
+                            <h6 class="m-0 font-weight-bold text-dark">Most Recent Hires</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
