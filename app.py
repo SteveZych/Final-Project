@@ -42,11 +42,13 @@ def terminations():
             con.close()
 
     # Display table of terminations
-    con = sql.connect("data/hr.sqlite")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
-    rows = cur.fetchall()
+    # con = sql.connect("data/hr.sqlite")
+    # con.row_factory = sql.Row
+    # cur = con.cursor()
+    # cur.execute("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
+    # rows = cur.fetchall()
+
+    rows = tableData("SELECT employee_name, position, department, employee_status, terminated_date, terminated_reason FROM employee WHERE is_terminated = 1 ORDER BY terminated_date DESC LIMIT 10;")
     return render_template("terminations.html", rows = rows)
 
 @app.route('/newHires', methods = ['POST', 'GET'])
@@ -91,18 +93,11 @@ def hires():
             return redirect("/newHires")
             con.close()
     
-    # Create connection to database
-    con = sql.connect("data/hr.sqlite")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-
     # Populate positions input
-    cur.execute("SELECT DISTINCT position FROM employee ORDER BY 1 ASC")
-    positions = cur.fetchall()
-
+    positions = tableData("SELECT DISTINCT position FROM employee ORDER BY 1 ASC")
+    
     # Display table of most recent hires
-    cur.execute("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
-    rows = cur.fetchall()
+    rows = tableData("SELECT employee_name, employee_id, position, department, hired_date, source_recruiting FROM employee ORDER BY hired_date DESC LIMIT 10;")
 
     return render_template('newHires.html', positions = positions, rows = rows)
 
