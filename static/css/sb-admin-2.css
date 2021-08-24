@@ -46,8 +46,12 @@
 *::after {
   box-sizing: border-box;
 }
-summary {
-  
+.summaryIcon {
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+.description {
+  margin-top: 30px;
 }
 html {
   font-family: sans-serif;
