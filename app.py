@@ -110,7 +110,16 @@ def learning():
     # description of model and display code?
     # graph of data 
     # algorithm from scikitlearn
-    employee = pd.read_csv('model/employee.csv')
+    # employee = pd.read_csv('employee.csv')
+    # employee.head()
+
+    con = sql.connect("data/hr.sqlite")
+    # con.row_factory = sql.Row
+    # cur = con.cursor()
+    employee = pd.read_sql_query("select is_married, is_diversity_job_fair, employee_salary, is_active, is_terminated, is_underrep_gender, is_citizen, gender_id, is_hispanic_latino, is_underrep_race_eth, survey_engagement_score, survey_emp_satisfaction_score, count_special_projects, count_days_late_past_30_days, count_absences, employee_status from employee", con)
+
+    # dataset = cur.fetchall()
+    con.close()
 
     X = employee.drop("employee_status", axis=1)
     y = employee["employee_status"]
@@ -132,7 +141,7 @@ def learning():
 
     # Create model and add layers
     model = Sequential()
-    model.add(Dense(units=100, activation='relu', input_dim=21))
+    model.add(Dense(units=100, activation='relu', input_dim=15))
     model.add(Dense(units=100, activation='relu'))
     model.add(Dense(units=3, activation='softmax'))
 
@@ -151,4 +160,28 @@ def learning():
     loss = str(round(model_loss, 3))
     accuracy = str(round(model_accuracy, 3))
 
-    return render_template('mlModel.html', model_loss=loss, model_accuracy=accuracy)
+    predict_x = model.predict(X_test) 
+    classes_x = np.argmax(predict_x,axis=1)
+    prediction_list = list(y_test[:200])
+
+    active_predictions = prediction_list.count('Active')
+    voluntary_predictions = prediction_list.count('Voluntarily Terminated')
+    cause_predictions = prediction_list.count('Terminated for Cause')
+    print(active_predictions, voluntary_predictions, cause_predictions)
+
+    active_percent = round((active_predictions / (active_predictions+voluntary_predictions+cause_predictions)),3)
+    voluntary_percent = round((voluntary_predictions / (active_predictions+voluntary_predictions+cause_predictions)),3)
+    cause_percent = round((cause_predictions / (active_predictions+voluntary_predictions+cause_predictions)),3)
+
+
+    return render_template(
+        'mlModel.html', 
+        model_loss=loss, 
+        model_accuracy=accuracy, 
+        active_predictions=active_predictions, 
+        voluntary_predictions=voluntary_predictions, 
+        cause_predictions=cause_predictions, 
+        active_percent=active_percent,
+        voluntary_percent=voluntary_percent,
+        cause_percent=cause_percent
+        )
