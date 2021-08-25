@@ -1,4 +1,4 @@
-# Employee Loss
+# All-Star HR^2
 
 <!-- README -->
   <h3 align="center">Employee Attrition Web App</h3>
@@ -29,24 +29,18 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Employees join and leave jobs for many different reasons. This project utilizes machine learning to model and predict when an employee may decide to leave their job. 
+Employees join and leave jobs for many different reasons. This project utilizes machine learning to model and predict employee status (active, attrition). 
 
-*  User-Driven Data Gathering
-*  
-*  
+*  User-Driven Data Gathering using HTML forms and SQLite (with Python)
+*  Mimic an HR group corporate tool [using an example HR dataset](https://www.kaggle.com/rhuebner/human-resources-data-set)
+*  Leverage Scikit + Python to develop a model that adapts to newly-entered data to continually form predictions
 
-###### Requirements
+###### Concept & Notes
+1. Questions we could potentially answer:
+  - Can we predict when an employee will leave a job?
+  - Can we predict the _percentage_ of employees that will leave a job? or stay?
 
-1. Find a problem worth solving, analyzing, or visualizing
-  -Can we predict when an employee will leave a job?
-
-2. Use ML in the context of technologies learned
-
-3. You must use:
-  - Scikit-Learn
-  - and/or another machine learning library
- 
-4. Our technologies include:
+2. Our technologies include:
   - Python Flask-powered API
   - HTML/CSS
   - JavaScript
@@ -54,11 +48,6 @@ Employees join and leave jobs for many different reasons. This project utilizes 
   - Pandas
   - Jupyter Notebook
   - Scikit-Learn
-  
-5. Host Application using Heroku or tool of your choice (Github Pages)
-
-8. Prepare a 15-minute data deep-dive or infrastructure walkthrough that shows
-   machine learning in the context of what we've already learned
 
 <!-- BUILT WITH -->
 ## Built With
@@ -66,11 +55,12 @@ Employees join and leave jobs for many different reasons. This project utilizes 
 * Jupyter Notebook
 * Flask
 * Kaggle
-* MS Word
 * SQLite
 * Pandas
 * Python
-* SQLAlchemy
+* HTML
+* CSS
+* JavaScript
 
 
 <!-- ROADMAP -->
@@ -98,4 +88,4 @@ Contributions are what make the open source community such an amazing place to b
 * [Tommy](https://github.com/gldn-god/)
 
 
-Project Link: [Employee Loss](https://github.com/SteveZych/Final-Project/issues)
+Project Link: [Employee Loss](https://github.com/SteveZych/Final-Project/)
