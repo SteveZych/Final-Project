@@ -41,26 +41,21 @@ Employees join and leave jobs for many different reasons. This project utilizes 
   - Can we predict the _percentage_ of employees that will leave a job? or stay?
 
 2. Our technologies include:
-  - Python Flask-powered API
-  - HTML/CSS
-  - JavaScript
+  - Flask-powered API
   - SQLite
   - Pandas
   - Jupyter Notebook
   - Scikit-Learn
+  - Kaggle
+  - Tensorflow
 
 <!-- BUILT WITH -->
 ## Built With
-
-* Jupyter Notebook
-* Flask
-* Kaggle
-* SQLite
-* Pandas
 * Python
 * HTML
 * CSS
 * JavaScript
+* SQL
 
 
 <!-- ROADMAP -->
