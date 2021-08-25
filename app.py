@@ -105,13 +105,77 @@ def hires():
 
     return render_template('newHires.html', positions = positions, rows = rows)
 
+@app.route('/performance', methods = ['POST', 'GET'])
+def performance():
+    # Form for editing existing employees for performance
+    if request.method == 'POST':
+        try:
+            employeeID = request.form['employeeID']
+            performance = request.form['performance']
+            engagement = request.form['engagement']
+            satisfaction = request.form['satisfaction']
+            projects = request.form['projects']
+            review = request.form['review']
+
+            if performance == "Exceeds":
+                perf_score_id = 4
+            elif performance == "Fully Meets":
+                perf_score_id = 3
+            elif performance == "Needs Improvement":
+                perf_score_id = 2
+            else:
+                perf_score_id = 1
+
+            with sql.connect("data/hr.sqlite") as con:
+                cur = con.cursor()
+                cur.execute("UPDATE employee SET perf_score_id=?, perf_score=?, survey_engagement_score=?, survey_emp_satisfaction_score=?, count_special_projects=?, last_perf_review_date=? WHERE employee_id=?;", (perf_score_id, performance, engagement, satisfaction, projects, review, employeeID))
+            con.commit()
+            print("Performance updated.")
+        except:
+            con.rollback()
+            print("Something went wrong.")
+        finally:
+            return redirect("/performance")
+            con.close()
+
+    # Display table of employees who have performance scores that need improvement or are doing improvement plans
+    rows = tableData("SELECT employee_name, position, department, perf_score, last_perf_review_date FROM employee WHERE perf_score IN ('Needs Improvement' , 'PIP') ORDER BY last_perf_review_date DESC;")
+    
+    return render_template('performance.html', rows = rows)
+
+@app.route('/tardy', methods = ['POST', 'GET'])
+def tardy():
+     # Form for editing existing employees for absence and tardiness
+    if request.method == 'POST':
+        try:
+            employeeID = request.form['employeeID']
+            absent = request.form['absent']
+            late = request.form['late']
+
+            with sql.connect("data/hr.sqlite") as con:
+                cur = con.cursor()
+                if absent == 1:
+                    absences = cur.execute("SELECT count_absences WHERE employee_id=?;",(employeeID))
+                    absences += 1
+                    cur.execute("UPDATE employee SET count_absences=?, count_days_late_past_30_days=? WHERE employee_id=?;", (absences, late, employeeID))
+                else:
+                    cur.execute("UPDATE employee SET count_days_late_past_30_days=? WHERE employee_id=?;", (late, employeeID))
+            con.commit()
+            print("Absence updated.")
+        except:
+            con.rollback()
+            print("Something went wrong.")
+        finally:
+            return redirect("/tardy")
+            con.close()
+
+    # Display table of most absent employees
+    rows = tableData("SELECT employee_name, position, department, count_absences, count_days_late_past_30_days FROM employee ORDER BY count_absences DESC;")
+    
+    return render_template('tardy.html', rows = rows)
+
 @app.route('/mlModel')
 def learning():
-    # description of model and display code?
-    # graph of data 
-    # algorithm from scikitlearn
-    # employee = pd.read_csv('employee.csv')
-    # employee.head()
 
     con = sql.connect("data/hr.sqlite")
     # con.row_factory = sql.Row
