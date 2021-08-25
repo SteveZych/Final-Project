@@ -1,8 +1,17 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3 as sql
 import pandas as pd
+import numpy as np
+import tensorflow
 from classesAndFunctions import *
-import random 
+import random
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from numpy.random import seed
+seed(1)
 
 app = Flask(__name__)
 
@@ -101,4 +110,45 @@ def learning():
     # description of model and display code?
     # graph of data 
     # algorithm from scikitlearn
-    return render_template('mlModel.html')
+    employee = pd.read_csv('model/employee.csv')
+
+    X = employee.drop("employee_status", axis=1)
+    y = employee["employee_status"]
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+    X_scaler = MinMaxScaler().fit(X_train)
+    X_train_scaled = X_scaler.transform(X_train)
+    X_test_scaled = X_scaler.transform(X_test)
+
+    # Step 1: Label-encode data set
+    label_encoder = LabelEncoder()
+    label_encoder.fit(y_train)
+    encoded_y_train = label_encoder.transform(y_train)
+    encoded_y_test = label_encoder.transform(y_test)
+
+    # Step 2: Convert encoded labels to one-hot-encoding
+    y_train_categorical = to_categorical(encoded_y_train)
+    y_test_categorical = to_categorical(encoded_y_test) 
+
+    # Create model and add layers
+    model = Sequential()
+    model.add(Dense(units=100, activation='relu', input_dim=21))
+    model.add(Dense(units=100, activation='relu'))
+    model.add(Dense(units=3, activation='softmax'))
+
+    # Compile and fit the model
+    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+    model.fit(
+        X_train_scaled,
+        y_train_categorical,
+        epochs=20,
+        shuffle=True,
+        verbose=2
+    )
+
+    model_loss, model_accuracy = model.evaluate(X_test_scaled, y_test_categorical, verbose=2)
+    loss = str(round(model_loss, 3))
+    accuracy = str(round(model_accuracy, 3))
+
+    return render_template('mlModel.html', model_loss=loss, model_accuracy=accuracy)
