@@ -19,6 +19,8 @@
 
     <!-- Custom styles for this template-->
     <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
 
 </head>
 
@@ -62,14 +64,15 @@
                 <a class="nav-link" href="/newHires">
                     <i class="fas fa-fw fa-table"></i>
                     <span>New Hires</span></a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="/terminations">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Terminations</span></a>
-            </li>  
-            <li class="nav-item">
+                <a class="nav-link" href="/tardy">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Absences</span></a>
+                <a class="nav-link" href="/performance">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Performance</span></a>
                 <a class="nav-link" href="/tables">
                     <i class="fas fa-fw fa-table"></i>
                     <span>All History</span></a>
@@ -134,8 +137,7 @@
                                     <h6 class="m-0 font-weight-bold text-dark">Model Overview</h6>
                                 </div>
                                 <div class="card-body">
-
-                                    <p>Here is where we will explain our model.  We will want to describe it conceptually, as the other tiles will show the result of the model.</p>
+                                    <p>The model attempts to predict the mix of active, voluntary termination, and terminated for cause employee statuses.</p>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +150,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Accuracy</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ model_accuracy }}%</div>
+                                            <div class="h3 mb-0 font-weight-bold text-gray-800">{{ model_accuracy }}%</div>
                                         </div>
                                     </div>
                                 </div>
@@ -164,79 +166,16 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Loss</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ model_loss }}%</div>
+                                            <div class="h3 mb-0 font-weight-bold text-gray-800">{{ model_loss }}%</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Active</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ active_predictions }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Voluntary</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ voluntary_predictions }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Cause</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ cause_predictions }}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
 
                     <!-- Content Row -->
 
-                    <div class="row">
-<!-- Big Line Chart example
-                        <div class="col-xl-12 col-lg-7">
-                            <div class="card shadow mb-4">
-
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-dark">Predictive Model</h6>
-                                </div>
-
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
 
                     <!-- Content Row -->
                     <div class="row">
@@ -248,28 +187,36 @@
                                     <!-- Card Header - Dropdown -->
                                     <div
                                         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-dark">Revenue Sources</h6>
+                                        <h6 class="m-0 font-weight-bold text-dark">Predicting Employee Status</h6>
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
-                                        </div>
-                                        <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Active
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Voluntary
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> Cause
-                                            </span>
+                                        <div class="chart-doughnut">
+                                            <canvas id="doughnut-chart" width="700" height="450"></canvas>
+<script>
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Active", "Voluntary", "Cause"],
+      datasets: [
+        {
+          label: "% of total",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [{{active_percent * 100}},{{voluntary_percent * 100}},{{cause_percent * 100}}]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Predictive Model by Employee Status'
+      }
+    }
+});
+</script>
                                         </div>
                                     </div>
                                 </div>
-
-
                         </div>
 
 
@@ -310,12 +257,12 @@
     <!-- Custom scripts for all pages-->
     <script src="/static/js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="/static/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
+    <!-- Page level plugins
+    <script src="/static/vendor/chart.js/Chart.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- Page level custom scripts 
     <script src="/static/js/demo/chart-area-demo.js"></script>
-    <script src="/static/js/demo/chart-pie-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>-->
 
 </body>
 
