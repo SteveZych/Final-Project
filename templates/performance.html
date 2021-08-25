@@ -161,12 +161,6 @@
 
                                                 <label for="review">Last Performance Review:</label>
                                                 <input type="date" id="review" name="review" style="width:175px">
-
-                                                <label for="status">Employee Status:</label>
-                                                <select id="status" class="form-select" aria-label="Default select example" name="status" style="width:175px">
-                                                    <option value="Voluntarily Terminated">Voluntarily Terminated</option>
-                                                    <option value="Terminated for Cause">Terminated for Cause</option>
-                                                </select>
                                               
                                               <button type="submit" class="btn" style="background-color:#B0F0B8;">Submit</button>
                                         </form>
@@ -200,7 +194,7 @@
                                             <td>{{row["position"]}}</td>
                                             <td>{{row["department"]}}</td>
                                             <td>{{row["perf_score"]}}</td>
-                                            <td>{{row["last_perf_reivew_date"]}}</td>
+                                            <td>{{row["last_perf_review_date"]}}</td>
                                         </tr>
                                         {% endfor %} 
                                     </tbody>
