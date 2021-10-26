@@ -249,3 +249,6 @@ def learning():
         voluntary_percent=voluntary_percent,
         cause_percent=cause_percent
         )
+
+if __name__ == '__main__':
+    app.run(threaded=True, port=5000)
