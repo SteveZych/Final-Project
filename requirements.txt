@@ -15,7 +15,7 @@ coverage==5.5
 cryptography==35.0.0
 cycler==0.10.0
 Cython==0.29.24
-dataclasses==0.8
+dataclasses
 decorator==5.1.0
 defusedxml==0.7.1
 entrypoints==0.3
