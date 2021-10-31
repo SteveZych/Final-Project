@@ -75,7 +75,11 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/amazing_feature`)
 5. Open a Pull Request
 
-
+<!--SITE-->
+## Site
+<img src"images/landing">
+<img src"images/update">
+<img src"images/predictive_model">
 <!-- CONTACT -->
 ## Contact
 
