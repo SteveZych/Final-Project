@@ -77,9 +77,8 @@ Contributions are what make the open source community such an amazing place to b
 
 <!--SITE-->
 ## Site
-<img src"images/landing">
-<img src"images/update">
-<img src"images/predictive_model">
+![GitHub Logo](images/landing.png)
+Format: ![Alt Text](url)
 <!-- CONTACT -->
 ## Contact
 
