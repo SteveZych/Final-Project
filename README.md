@@ -77,8 +77,10 @@ Contributions are what make the open source community such an amazing place to b
 
 <!--SITE-->
 ## Site
-![GitHub Logo](images/landing.png)
-Format: ![Alt Text](url)
+![Landing Page](images/landing.png)
+![Updating](images/update.png)
+![Predictive Model](images/predictive_model.png)
+
 <!-- CONTACT -->
 ## Contact
 
